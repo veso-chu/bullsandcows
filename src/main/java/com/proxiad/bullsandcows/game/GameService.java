@@ -35,18 +35,18 @@ public class GameService {
 		repository.add(game);
 	}
 	
-	public Map<String, Integer> guessGameGoal(Game game, String goal) {
-		Integer bulls = 0;
-		Integer cows = 0;
-		Map<String, Integer> result = new HashMap<>();
-		
-		if (goal.length() != 4) {
-			result.put("bulls", bulls);
-			result.put("cows", cows);
-			
-			return result;
-		} else {
-			for ()
-		}
-	}
+//	public Map<String, Integer> guessGameGoal(Game game, String goal) {
+//		Integer bulls = 0;
+//		Integer cows = 0;
+//		Map<String, Integer> result = new HashMap<>();
+//		
+//		if (goal.length() != 4) {
+//			result.put("bulls", bulls);
+//			result.put("cows", cows);
+//			
+//			return result;
+//		} else {
+//			for ()
+//		}
+//	}
 }
