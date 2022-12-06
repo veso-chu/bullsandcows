@@ -9,14 +9,6 @@
 			.error {
 				color: #ff0000;
 			}
-			
-			.errorblock {
-				color: #000;
-				background-color: #ffEEEE;
-				border: 3px solid #ff0000;
-				padding: 8px;
-				margin: 16px;
-			}
 		</style>
 	</head>
 	<body>
@@ -41,7 +33,7 @@
 				</tr>
 			</table>
 		</form:form>
-		
+
 		<form action="/bullsandcows">
 		    <input type="submit" value="Back" />
 		</form>
