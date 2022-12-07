@@ -9,6 +9,10 @@ public class GameGoalValidator implements ConstraintValidator<GameGoalConstraint
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		return value.matches(REGEX_FOUR_NONREPEATING_NUMBERS);
+		return validateGameGoalString(value);
+	}
+
+	public static boolean validateGameGoalString(String gameGoalString) {
+		return gameGoalString.matches(REGEX_FOUR_NONREPEATING_NUMBERS);
 	}
 }

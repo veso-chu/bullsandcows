@@ -62,9 +62,8 @@ public class GameService {
 	public Map<String, Integer> guessGameGoal(Game game, String goal) {
 		Integer bulls = 0;
 		Integer cows = 0;
-		Map<String, Integer> result = new HashMap<>();
 
-		if (goal.matches(GameGoalValidator.REGEX_FOUR_NONREPEATING_NUMBERS)) {
+		if (GameGoalValidator.validateGameGoalString(goal)) {
 			for (int i = 0; i < goal.length(); i++) {
 				if (game.getGoal().charAt(i) == goal.charAt(i)) {
 					bulls++;
@@ -73,6 +72,7 @@ public class GameService {
 				}
 			}
 		}
+		Map<String, Integer> result = new HashMap<>();
 		result.put("bulls", bulls);
 		result.put("cows", cows);
 
