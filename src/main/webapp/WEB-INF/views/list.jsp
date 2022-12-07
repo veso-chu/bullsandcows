@@ -6,6 +6,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Game List</title>
+		<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 	</head>
 	<body style="text-align: center;">
 		<h1>Created Games (<c:out value="${games.size()}"/>)</h1>

@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>New Game</title>
+		<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 		<style type="text/css">
 			.error {
 				color: #ff0000;
