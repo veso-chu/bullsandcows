@@ -7,7 +7,7 @@
 		<meta charset="ISO-8859-1">
 		<title>Game View</title>
 	</head>
-	<body>
+	<body style="text-align: center;">
 		<h1>Game (<c:out value="${game.getId()}"/>)</h1>
 		<c:choose>
 			<c:when test="${game.isSolved()}">
@@ -17,7 +17,7 @@
 			</c:when>
 			<c:otherwise>
 				<form action="/bullsandcows/game/${game.getId()}">
-					<table>
+					<table style="margin: 0 auto;">
 						<tr>
 							<td>Guess:</td>
 						</tr>

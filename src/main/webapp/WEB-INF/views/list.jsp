@@ -7,10 +7,10 @@
 		<meta charset="ISO-8859-1">
 		<title>Game List</title>
 	</head>
-	<body>
+	<body style="text-align: center;">
 		<h1>Created Games (<c:out value="${games.size()}"/>)</h1>
 		<c:if test="${games.size() > 0}">
-			<table>
+			<table style="margin: 0 auto; text-align: center;">
 	    		<c:forEach items="${games}" var="game">
 					<tr>
 						<td>

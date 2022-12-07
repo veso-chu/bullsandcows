@@ -11,10 +11,10 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body style="text-align: center;">
 		<h1>New Game</h1>
 		<form:form modelAttribute="game">
-			<table>
+			<table style="margin: 0 auto; text-align: center;">
 				<tr>
 					<td>Goal:</td>
 				</tr>
@@ -22,6 +22,8 @@
 					<td>
 						<form:input path="goal"/>
 					</td>
+				</tr>
+				<tr>
 					<td>
 						<form:errors path="goal" cssClass="error"/>
 					</td>
