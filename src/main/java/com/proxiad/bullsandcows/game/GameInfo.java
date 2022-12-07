@@ -1,17 +1,19 @@
 package com.proxiad.bullsandcows.game;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.proxiad.bullsandcows.guess.Guess;
 
 public class GameInfo {
 
-	private Map<String, Map<String, Integer>> guesses;
+	private List<Guess> guesses;
 
 	/**
 	 * Constructor
 	 */
 	public GameInfo() {
-		this.setGuesses(new HashMap<>());
+		this.setGuesses(new ArrayList<>());
 	}
 
 	/**
@@ -19,7 +21,7 @@ public class GameInfo {
 	 *
 	 * @return
 	 */
-	public Map<String, Map<String, Integer>> getGuesses() {
+	public List<Guess> getGuesses() {
 		return guesses;
 	}
 
@@ -28,7 +30,7 @@ public class GameInfo {
 	 *
 	 * @param guesses
 	 */
-	public void setGuesses(Map<String, Map<String, Integer>> guesses) {
+	public void setGuesses(List<Guess> guesses) {
 		this.guesses = guesses;
 	}
 
@@ -37,7 +39,7 @@ public class GameInfo {
 	 *
 	 * @param guess
 	 */
-	public void addGuess(String guess, Map<String, Integer> guessResult) {
-		this.guesses.put(guess, guessResult);
+	public void addGuess(Guess guess) {
+		this.guesses.add(guess);
 	}
 }

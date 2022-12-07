@@ -39,7 +39,7 @@ public class Game {
 	 *
 	 * @return
 	 */
-	public void setId() {
+	private void setId() {
 		this.id = UUID.randomUUID();
 	}
 
@@ -57,7 +57,7 @@ public class Game {
 	 *
 	 * @return
 	 */
-	public void setGoal(String goal) {
+	private void setGoal(String goal) {
 		this.goal = goal;
 	}
 
@@ -93,7 +93,7 @@ public class Game {
 	 *
 	 * @param gameInfo
 	 */
-	public void setGameInfo(GameInfo gameInfo) {
+	private void setGameInfo(GameInfo gameInfo) {
 		this.gameInfo = gameInfo;
 	}
 }

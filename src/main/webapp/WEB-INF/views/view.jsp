@@ -47,9 +47,9 @@
 			<table style="margin: 0 auto;">
 				<c:forEach items="${game.getGameInfo().getGuesses()}" var="guess">
 					<tr>
-						<td><c:out value="${guess.getKey()}"/></td>
-						<c:forEach items="${guess.getValue()}" var="guessResult">
-							<td><c:out value="|${guessResult.getKey()}:${guessResult.getValue()}"/></td>
+						<td><c:out value="${guess.getGuess()}"/></td>
+						<c:forEach items="${guess.getGuessResult()}" var="guessResult">
+							<td><c:out value="| ${guessResult.getKey()}:${guessResult.getValue()}"/></td>
 						</c:forEach>
 					</tr>
 				</c:forEach>

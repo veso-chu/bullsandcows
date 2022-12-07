@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.proxiad.bullsandcows.guess.Guess;
 
 //@Service
 public class GameService {
@@ -17,7 +17,6 @@ public class GameService {
 	 *
 	 * @param gameRepository
 	 */
-	@Autowired
 	public GameService(GameRepository gameRepository) {
 		repository = gameRepository;
 	}
@@ -52,7 +51,6 @@ public class GameService {
 	/**
 	 * Attempt to guess the passed Game goal.
 	 * Returns a Map with 0 values if the passed guess String is incorrect.
-	 * TODO: Create a Guess object, validate it before passing and return an error message.
 	 *
 	 * @param game
 	 * @param goal
@@ -78,7 +76,7 @@ public class GameService {
 		Map<String, Integer> result = new HashMap<>();
 		result.put("bulls", bulls);
 		result.put("cows", cows);
-		game.getGameInfo().addGuess(guess, result);
+		game.getGameInfo().addGuess(new Guess(guess, result));
 
 
 		return result;
