@@ -44,7 +44,7 @@
 		</c:choose>
 		<c:if test="${game.getGameInfo().getGuesses().size() > 0}">
 			<h2>Previous guesses:</h2>
-			<table>
+			<table style="margin: 0 auto;">
 				<c:forEach items="${game.getGameInfo().getGuesses()}" var="guess">
 					<tr>
 						<td><c:out value="${guess.getKey()}"/></td>
