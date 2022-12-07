@@ -82,4 +82,28 @@ class GameServiceTest {
 		return result;
 	}
 
+	@Test
+	void testGuessGameGoalIncreasesTheGuessesSizeOfGameInfoRelatedGame() {
+		gameService.createGame(game);
+		gameService.guessGameGoal(game, BULL_MATCH_STRING);
+		Integer guessesCount = game.getGameInfo().getGuesses().size();
+
+		assertEquals(1, guessesCount);
+	}
+
+	@Test
+	void testGuessGameGoalSetsGameSolvedToTrueOnCorrectGuess() {
+		gameService.createGame(game);
+		gameService.guessGameGoal(game, GOAL_STRING);
+
+		assertTrue(game.isSolved());
+	}
+
+	@Test
+	void testGuessGameGoalDoesNotChangeGameSolvedOnIncorrectGuess() {
+		gameService.createGame(game);
+		gameService.guessGameGoal(game, BULL_MATCH_STRING);
+
+		assertFalse(game.isSolved());
+	}
 }
