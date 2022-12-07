@@ -16,17 +16,17 @@ public class BullsandCowsConfig {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		
+
 		return resolver;
 	}
-	
-//	@Bean(name = "gameService")
-//	public GameService getGameService() {
-//		return new GameService(getGameRepository());
-//	}
-	
-//	@Bean(name = "gameRepository")
-//	public GameRepository getGameRepository() {
-//		return new GameRepository();
-//	}
+
+	@Bean(name = "gameService")
+	public GameService getGameService() {
+		return new GameService(getGameRepository());
+	}
+
+	@Bean(name = "gameRepository")
+	public GameRepository getGameRepository() {
+		return new GameRepository();
+	}
 }

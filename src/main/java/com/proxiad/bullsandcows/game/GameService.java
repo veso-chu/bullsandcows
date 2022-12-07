@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class GameService {
 
 	private GameRepository repository;
@@ -59,22 +58,28 @@ public class GameService {
 	 * @param goal
 	 * @return
 	 */
-	public Map<String, Integer> guessGameGoal(Game game, String goal) {
+	public Map<String, Integer> guessGameGoal(Game game, String guess) {
 		Integer bulls = 0;
 		Integer cows = 0;
 
-		if (GameGoalValidator.validateGameGoalString(goal)) {
-			for (int i = 0; i < goal.length(); i++) {
-				if (game.getGoal().charAt(i) == goal.charAt(i)) {
+		if (GameGoalValidator.validateGameGoalString(guess)) {
+			for (int i = 0; i < guess.length(); i++) {
+				if (game.getGoal().charAt(i) == guess.charAt(i)) {
 					bulls++;
-				} else if (game.getGoal().contains(goal.substring(i, i+1))) {
+				} else if (game.getGoal().contains(guess.substring(i, i+1))) {
 					cows++;
 				}
 			}
 		}
+
+		if (bulls.equals(4)) {
+			game.setSolved(true);
+		}
 		Map<String, Integer> result = new HashMap<>();
 		result.put("bulls", bulls);
 		result.put("cows", cows);
+		game.getGameInfo().addGuess(guess, result);
+
 
 		return result;
 	}
