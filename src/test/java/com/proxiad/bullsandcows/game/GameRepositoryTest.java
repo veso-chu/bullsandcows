@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class GameRepositoryTest {
 
-	GameRepository gameRepository = new GameRepository();
+	GameRepo gameRepository = new InMemoryGameRepo();
 	Game game = mock(Game.class);
 
 	@Test

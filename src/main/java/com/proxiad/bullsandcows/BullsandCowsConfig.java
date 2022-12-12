@@ -8,13 +8,16 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import com.proxiad.bullsandcows.game.GameRepository;
+import com.proxiad.bullsandcows.game.GameRepo;
 import com.proxiad.bullsandcows.game.GameService;
+import com.proxiad.bullsandcows.game.GameServiceImpl;
+import com.proxiad.bullsandcows.game.InMemoryGameRepo;
 
 @Configuration
 @EnableWebMvc
 public class BullsandCowsConfig implements WebMvcConfigurer {
 
+	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
@@ -30,11 +33,11 @@ public class BullsandCowsConfig implements WebMvcConfigurer {
 
 	@Bean(name = "gameService")
 	public GameService getGameService() {
-		return new GameService(getGameRepository());
+		return new GameServiceImpl(getGameRepository());
 	}
 
 	@Bean(name = "gameRepository")
-	public GameRepository getGameRepository() {
-		return new GameRepository();
+	public GameRepo getGameRepository() {
+		return new InMemoryGameRepo();
 	}
 }
