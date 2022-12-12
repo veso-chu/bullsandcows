@@ -1,84 +1,38 @@
 package com.proxiad.bullsandcows.game;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-import com.proxiad.bullsandcows.guess.Guess;
+public interface GameService {
 
-//@Service
-public class GameService {
+  /**
+   * Retrieves all Game objects from the repository
+   *
+   * @return
+   */
+  List<Game> getGames();
 
-	private GameRepository repository;
+  /**
+   * Retrieves a Game from the repository with the given UUID
+   *
+   * @param game
+   */
+  Game getGame(String id);
 
-	/**
-	 * Constructor
-	 *
-	 * @param gameRepository
-	 */
-	public GameService(GameRepository gameRepository) {
-		repository = gameRepository;
-	}
+  /**
+   * Inserts a Game into the repository
+   *
+   * @param game
+   * @return
+   */
+  Game createGame(String goal);
 
-	/**
-	 * Retrieves all Game objects from the repository
-	 *
-	 * @return
-	 */
-	public List<Game> getGames() {
-		return repository.findAll();
-	}
-
-	/**
-	 * Retrieves a Game from the repository with the given UUID
-	 *
-	 * @param game
-	 */
-	public Game getGame(UUID id) {
-		return repository.findById(id);
-	}
-
-	/**
-	 * Inserts a Game into the repository
-	 *
-	 * @param game
-	 */
-	public void createGame(Game game) {
-		repository.add(game);
-	}
-
-	/**
-	 * Attempt to guess the passed Game goal.
-	 * Returns a Map with 0 values if the passed guess String is incorrect.
-	 *
-	 * @param game
-	 * @param goal
-	 * @return
-	 */
-	public Map<String, Integer> guessGameGoal(Game game, String guess) {
-		Integer bulls = 0;
-		Integer cows = 0;
-
-		if (GameGoalValidator.validateGameGoalString(guess)) {
-			for (int i = 0; i < guess.length(); i++) {
-				if (game.getGoal().charAt(i) == guess.charAt(i)) {
-					bulls++;
-				} else if (game.getGoal().contains(guess.substring(i, i+1))) {
-					cows++;
-				}
-			}
-		}
-
-		if (bulls.equals(4)) {
-			game.setSolved(true);
-		}
-		Map<String, Integer> result = new HashMap<>();
-		result.put("bulls", bulls);
-		result.put("cows", cows);
-		game.getGameInfo().addGuess(new Guess(guess, result));
-
-
-		return result;
-	}
+  /**
+   * Attempt to guess the passed Game goal. Returns a Map with 0 values if the passed guess String
+   * is incorrect.
+   *
+   * @param game
+   * @param goal
+   * @return
+   */
+  Game guessGameGoal(String id, String guess);
 }

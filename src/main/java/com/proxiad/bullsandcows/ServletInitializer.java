@@ -1,12 +1,21 @@
 package com.proxiad.bullsandcows;
 
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class ServletInitializer extends SpringBootServletInitializer {
+public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(BullsandcowsApplication.class);
-	}
+  @Override
+  protected Class<?>[] getRootConfigClasses() {
+    return new Class<?>[] {BullsandCowsConfig.class};
+  }
+
+  @Override
+  protected Class<?>[] getServletConfigClasses() {
+    return null;
+  }
+
+  @Override
+  protected String[] getServletMappings() {
+    return new String[] {"/"};
+  }
 }

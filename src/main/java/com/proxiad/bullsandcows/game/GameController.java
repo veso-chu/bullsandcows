@@ -1,78 +1,64 @@
 package com.proxiad.bullsandcows.game;
 
 import java.util.Map;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import jakarta.validation.Valid;
 
 @Controller
 public class GameController {
 
-	private final GameService gameService;
+  private final GameService gameService;
 
-	@Autowired
-	public GameController(GameService gameService) {
-		this.gameService = gameService;
-	}
+  @Autowired
+  public GameController(GameService gameService) {
+    this.gameService = gameService;
+  }
 
-	@GetMapping("game/{id}")
-	public String getGameView(
-			@PathVariable UUID id,
-			@RequestParam(name = "guess", defaultValue = "") String guess,
-			Map<String, Object> model)
-	{
-		Game game = gameService.getGame(id);
-		model.put("game", game);
+  @GetMapping("game/{id}")
+  public String getGameView(@PathVariable String id, Map<String, Object> model) {
+    Game game = gameService.getGame(id);
+    // 404 page Not found
 
-		if (!guess.equals("")) {
-			model.put("guessResult", gameService.guessGameGoal(game, guess));
-		}
+    model.put("game", game);
+    return "view";
+  }
 
-		return "view";
-	}
+  @PostMapping("game/{id}/guess")
+  public String makeGuess(
+      @PathVariable String id,
+      @GameGoalConstraint String guess,
+      Map<String, Object> model,
+      Errors errors) {
+    // errors.hasErrors()
 
-//	@GetMapping("game/*")
-//	public String getGameView(HttpServletRequest request, Map<String, Object> model) {
-//		List<String> pathSegments = ServletUriComponentsBuilder.fromRequest(request).build().getPathSegments();
-//		UUID id = UUID.fromString(pathSegments.get(2));
-//		Game game = gameService.getGame(id);
-//		model.put("game", game);
-//
-//		return "view";
-//	}
+    Game game = gameService.getGame(id);
+    // 404 page Not found
 
-	@GetMapping("game/list")
-	public String getGameListPage(Map<String, Object> model) {
-		model.put("games", gameService.getGames());
+    model.put("game", game);
+    gameService.guessGameGoal(id, guess);
+    return "view";
+  }
 
-		return "list";
-	}
+  @GetMapping("game/list")
+  public String getGameListPage(Map<String, Object> model) {
+    model.put("games", gameService.getGames());
 
-	@GetMapping("game")
-	public String getGameCreatePage(@ModelAttribute ("game") Game game) {
-		return "create";
-	}
+    return "list";
+  }
 
-	@PostMapping("game")
-	public String createGame(
-			@Valid @ModelAttribute ("game") Game game,
-			BindingResult result)
-	{
-		if (result.hasErrors()) {
-			System.out.println("There were errors creating the game with goal " + game.getGoal());
-			return "create";
-		}
-		gameService.createGame(game);
+  @GetMapping("game")
+  public String getGameCreatePage(@ModelAttribute("game") Game game) {
+    return "create";
+  }
 
-		return "redirect:game/" + game.getId();
-	}
+  @PostMapping("game")
+  public String createGame(String goal) {
+    var game = gameService.createGame(goal);
+    return "redirect:game/" + game.getId();
+  }
 }
