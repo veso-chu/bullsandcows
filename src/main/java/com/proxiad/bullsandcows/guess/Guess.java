@@ -1,53 +1,32 @@
 package com.proxiad.bullsandcows.guess;
 
-import java.util.Map;
-
 public class Guess {
 
-	private String guess;
-	private Map<String, Integer> guessResult;
+  private String guess;
+  private Integer bulls;
+  private Integer cows;
 
-	/**
-	 * Constructor
-	 */
-	public Guess(String guess, Map<String, Integer> guessResult) {
-		this.setGuess(guess);
-		this.setGuessResult(guessResult);
-	}
+  public String getGuess() {
+    return guess;
+  }
 
-	/**
-	 * Getter for guess
-	 *
-	 * @return
-	 */
-	public String getGuess() {
-		return guess;
-	}
+  public void setGuess(String guess) {
+    this.guess = guess;
+  }
 
-	/**
-	 * Setter for guess
-	 *
-	 * @return
-	 */
-	public void setGuess(String guess) {
-		this.guess = guess;
-	}
+  public Integer getBulls() {
+    return bulls;
+  }
 
-	/**
-	 * Getter for guessResult
-	 *
-	 * @return
-	 */
-	public Map<String, Integer> getGuessResult() {
-		return guessResult;
-	}
+  public void setBulls(Integer bulls) {
+    this.bulls = bulls;
+  }
 
-	/**
-	 * Setter for guessResult
-	 *
-	 * @return
-	 */
-	public void setGuessResult(Map<String, Integer> guessResult) {
-		this.guessResult = guessResult;
-	}
+  public Integer getCows() {
+    return cows;
+  }
+
+  public void setCows(Integer cows) {
+    this.cows = cows;
+  }
 }

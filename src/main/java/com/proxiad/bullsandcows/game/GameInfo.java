@@ -1,9 +1,8 @@
 package com.proxiad.bullsandcows.game;
 
+import com.proxiad.bullsandcows.guess.Guess;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.proxiad.bullsandcows.guess.Guess;
 
 public class GameInfo {
 

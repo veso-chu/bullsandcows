@@ -1,99 +1,45 @@
 package com.proxiad.bullsandcows.game;
 
-import java.util.UUID;
-
+import com.proxiad.bullsandcows.guess.Guess;
 import jakarta.validation.constraints.NotEmpty;
+import java.util.List;
 
 public class Game {
 
-	private UUID id;
-	@NotEmpty
-	@GameGoalConstraint
-	private String goal;
-	private boolean solved;
-	private GameInfo gameInfo;
+  private String id;
+  @NotEmpty @GameGoalConstraint private String goal;
+  private boolean solved;
+  private List<Guess> guessList;
 
-	/**
-	 * Constructor
-	 *
-	 * @param goal
-	 */
-	public Game(String goal) {
-		this.setId();
-		this.setGoal(goal);
-		this.setGameInfo(new GameInfo());
-		this.setSolved(false);
-	}
+  public String getId() {
+    return id;
+  }
 
-	/**
-	 * Getter for id
-	 *
-	 * @return
-	 */
-	public UUID getId() {
-		return id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	/**
-	 * Setter for id
-	 *
-	 * @return
-	 */
-	private void setId() {
-		this.id = UUID.randomUUID();
-	}
+  public String getGoal() {
+    return goal;
+  }
 
-	/**
-	 * Getter for goal
-	 *
-	 * @return
-	 */
-	public String getGoal() {
-		return goal;
-	}
+  public void setGoal(String goal) {
+    this.goal = goal;
+  }
 
-	/**
-	 * Setter for goal
-	 *
-	 * @return
-	 */
-	private void setGoal(String goal) {
-		this.goal = goal;
-	}
+  public boolean isSolved() {
+    return solved;
+  }
 
-	/**
-	 * Getter for solved
-	 *
-	 * @return
-	 */
-	public boolean isSolved() {
-		return solved;
-	}
+  public void setSolved(boolean solved) {
+    this.solved = solved;
+  }
 
-	/**
-	 * Setter for solved
-	 *
-	 * @return
-	 */
-	public void setSolved(boolean solved) {
-		this.solved = solved;
-	}
+  public List<Guess> getGuessList() {
+    return guessList;
+  }
 
-	/**
-	 * Getter for GameInfo
-	 *
-	 * @return
-	 */
-	public GameInfo getGameInfo() {
-		return gameInfo;
-	}
-
-	/**
-	 * Setter for GameInfo
-	 *
-	 * @param gameInfo
-	 */
-	private void setGameInfo(GameInfo gameInfo) {
-		this.gameInfo = gameInfo;
-	}
+  public void setGuessList(List<Guess> gameInfo) {
+    this.guessList = gameInfo;
+  }
 }

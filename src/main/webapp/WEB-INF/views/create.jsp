@@ -7,15 +7,11 @@
 		<meta charset="ISO-8859-1">
 		<title>New Game</title>
 		<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
-		<style type="text/css">
-			.error {
-				color: #ff0000;
-			}
-		</style>
+		<link href="<c:url value="/resources/css/errors.css" />" rel="stylesheet">
 	</head>
 	<body style="text-align: center;">
 		<h1>New Game</h1>
-		<form:form modelAttribute="game">
+		<form:form modelAttribute="gameCreateForm">
 			<table style="margin: 0 auto; text-align: center;">
 				<tr>
 					<td>Goal:</td>
