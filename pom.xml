@@ -48,6 +48,11 @@
 		    <artifactId>hibernate-validator</artifactId>
 		    <version>8.0.0.Final</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
 	
 		<!-- Spring boot -->
 		<dependency>

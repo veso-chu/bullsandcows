@@ -34,7 +34,7 @@
 			</table>
 		</form:form>
 
-		<form action="/bullsandcows">
+		<form action="/">
 		    <input type="submit" value="Back" />
 		</form>
 	</body>

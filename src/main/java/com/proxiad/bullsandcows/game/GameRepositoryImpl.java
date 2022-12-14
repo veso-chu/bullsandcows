@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.springframework.stereotype.Repository;
 
-// @Repository
+@Repository
 public class GameRepositoryImpl implements GameRepository {
 
   private Map<String, Game> repository;

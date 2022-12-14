@@ -19,7 +19,7 @@
 				</td>
 			</c:when>
 			<c:otherwise>
-				<form:form modelAttribute="guessCreateForm" action="/bullsandcows/game/${game.getId()}/guess">
+				<form:form modelAttribute="guessCreateForm" action="/game/${game.getId()}/guess">
 					<table style="margin: 0 auto; text-align: center;">
 						<tr>
 							<td>Guess:</td>
@@ -56,7 +56,7 @@
 			</table>
 		</c:if>
 	
-		<form action="/bullsandcows">
+		<form action="/">
 			<input type="submit" value="Back" />
 		</form>
 	</body>

@@ -11,8 +11,12 @@
 	<body>
 		<div style="text-align: center;">
 			<h1>Bulls and Cows</h1>
-			<a href="game/list">Find Game</a>
-			<a href="game">New Game</a>
+			<form action="game/list">
+				<input type="submit" value="Find Game" />
+			</form>
+			<form action="game">
+				<input type="submit" value="New Game" />
+			</form>
 		</div>
 	</body>
 </html>

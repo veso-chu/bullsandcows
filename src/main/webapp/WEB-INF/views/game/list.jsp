@@ -15,14 +15,14 @@
 	    		<c:forEach items="${games}" var="game">
 					<tr>
 						<td>
-							<a href="/bullsandcows/game/${game.getId()}"><c:out value="Game(${game.getId()})"/></a>
+							<a href="/game/${game.getId()}"><c:out value="Game(${game.getId()})"/></a>
 						</td>
 					</tr>
 				</c:forEach>
 	    	</table>
 		</c:if>
 
-		<form action="/bullsandcows">
+		<form action="/">
 		    <input type="submit" value="Back" />
 		</form>
 	</body>

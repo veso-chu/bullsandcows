@@ -44,7 +44,7 @@ public class GameController {
     }
 
     model.put("game", game);
-    return "view";
+    return "game/view";
   }
 
   @PostMapping("game/{id}/guess")
@@ -63,19 +63,19 @@ public class GameController {
       gameService.guessGameGoal(id, guessCreateForm.getGuess());
     }
 
-    return "view";
+    return "game/view";
   }
 
   @GetMapping("game/list")
   public String getGameListPage(Map<String, Object> model) {
     model.put("games", gameService.getGames());
 
-    return "list";
+    return "game/list";
   }
 
   @GetMapping("game")
   public String getGameCreatePage(@ModelAttribute("gameCreateForm") GameCreateForm gameCreateForm) {
-    return "create";
+    return "game/create";
   }
 
   @PostMapping("game")
@@ -83,7 +83,7 @@ public class GameController {
       @Valid @ModelAttribute("gameCreateForm") GameCreateForm gameCreateForm,
       BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return "create";
+      return "game/create";
     }
     var game = gameService.createGame(gameCreateForm.getGoal());
 
