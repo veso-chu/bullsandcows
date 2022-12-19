@@ -1,24 +1,19 @@
 package com.proxiad.bullsandcows.game;
 
-import com.proxiad.bullsandcows.guess.Guess;
-import java.util.ArrayList;
+import com.proxiad.bullsandcows.guess.GuessServiceImpl;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
 
-  private GameRepository repository;
+  @Autowired private GameRepository repository;
 
-  /**
-   * Constructor
-   *
-   * @param gameRepository
-   */
-  public GameServiceImpl(GameRepository gameRepository) {
-    repository = gameRepository;
-  }
+  @Autowired private GuessServiceImpl guessService;
 
   /**
    * Retrieves all Game objects from the repository
@@ -37,7 +32,12 @@ public class GameServiceImpl implements GameService {
    */
   @Override
   public Game getGame(String id) {
-    return repository.findById(id);
+    try {
+      return repository.findById(id).orElseThrow(() -> new Exception("Game not found"));
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
   }
 
   /**
@@ -50,8 +50,8 @@ public class GameServiceImpl implements GameService {
     Game game = new Game();
     game.setId(UUID.randomUUID().toString());
     game.setGoal(goal);
-    game.setGuessList(new ArrayList<>());
-    repository.add(game);
+    //    game.setGuessList(new ArrayList<>());
+    repository.save(game);
     return game;
   }
 
@@ -65,7 +65,7 @@ public class GameServiceImpl implements GameService {
    */
   @Override
   public Game guessGameGoal(String id, String guess) {
-    Game game = repository.findById(id);
+    Game game = this.getGame(id);
     Integer bulls = 0;
     Integer cows = 0;
 
@@ -81,26 +81,12 @@ public class GameServiceImpl implements GameService {
 
     if (bulls.equals(4)) {
       game.setSolved(true);
+      repository.save(game);
     }
-    game.getGuessList().add(createGuess(guess, bulls, cows));
+
+    guessService.createGuess(game, guess, bulls, cows);
+    //    game.getGuessList().add(guessService.createGuess(game, guess, bulls, cows));
 
     return game;
-  }
-
-  /**
-   * Creates and returns a Guess object
-   *
-   * @param goal
-   * @param bulls
-   * @param cows
-   * @return
-   */
-  private Guess createGuess(String goal, Integer bulls, Integer cows) {
-    Guess guessEntry = new Guess();
-    guessEntry.setGuess(goal);
-    guessEntry.setBulls(bulls);
-    guessEntry.setCows(cows);
-
-    return guessEntry;
   }
 }

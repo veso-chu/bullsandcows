@@ -43,10 +43,10 @@
 				</form:form>
 			</c:otherwise>
 		</c:choose>
-		<c:if test="${game.getGuessList().size() > 0}">
+		<c:if test="${guesses.size() > 0}">
 			<h2>Previous guesses:</h2>
 			<table style="margin: 0 auto;">
-				<c:forEach items="${game.getGuessList()}" var="guess">
+				<c:forEach items="${guesses}" var="guess">
 					<tr>
 						<td><c:out value="${guess.getGuess()}"/></td>
 						<td><c:out value="| Bulls: ${guess.getBulls()}"/></td>

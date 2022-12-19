@@ -1,6 +1,7 @@
 package com.proxiad.bullsandcows.game;
 
 import com.proxiad.bullsandcows.guess.GuessCreateForm;
+import com.proxiad.bullsandcows.guess.GuessServiceImpl;
 import jakarta.validation.Valid;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,12 @@ public class GameController {
 
   private final GameServiceImpl gameService;
 
+  private final GuessServiceImpl guessService;
+
   @Autowired
-  public GameController(GameServiceImpl gameService) {
+  public GameController(GameServiceImpl gameService, GuessServiceImpl guessService) {
     this.gameService = gameService;
+    this.guessService = guessService;
   }
 
   @GetMapping("404")
@@ -44,6 +48,8 @@ public class GameController {
     }
 
     model.put("game", game);
+    model.put("guesses", guessService.findGuessesByGameId(id));
+
     return "game/view";
   }
 
@@ -62,6 +68,7 @@ public class GameController {
     if (!bindingResult.hasErrors()) {
       gameService.guessGameGoal(id, guessCreateForm.getGuess());
     }
+    model.put("guesses", guessService.findGuessesByGameId(id));
 
     return "game/view";
   }
