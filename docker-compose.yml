@@ -4,7 +4,7 @@ networks:
   default:
 
 services:
-  db:
+  mysql_db:
     image: mysql:5.7
     container_name: bullsandcows
     ports:
