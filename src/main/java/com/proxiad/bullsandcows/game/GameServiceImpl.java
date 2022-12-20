@@ -20,53 +20,26 @@ public class GameServiceImpl implements GameService {
     this.guessService = guessService;
   }
 
-  /**
-   * Retrieves all Game objects from the repository
-   *
-   * @return
-   */
   @Override
   public List<Game> getGames() {
     return repository.findAll();
   }
 
-  /**
-   * Retrieves a Game from the repository with the given UUID
-   *
-   * @param game
-   */
   @Override
   public Game getGame(String id) {
-    try {
-      return repository.findById(id).orElseThrow(() -> new Exception("Game not found"));
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
+    return repository.findById(id).orElse(null);
   }
 
-  /**
-   * Inserts a Game into the repository
-   *
-   * @param game
-   */
   @Override
   public Game createGame(String goal) {
     Game game = new Game();
     game.setId(UUID.randomUUID().toString());
     game.setGoal(goal);
+    game.setSolved(false);
     repository.save(game);
     return game;
   }
 
-  /**
-   * Attempt to guess the passed Game goal. If the guess matches the Game goal, the Game solved
-   * property is set to true.
-   *
-   * @param game
-   * @param goal
-   * @return
-   */
   @Override
   public Game guessGameGoal(String id, String guess) {
     Game game = this.getGame(id);
@@ -82,14 +55,22 @@ public class GameServiceImpl implements GameService {
         }
       }
     }
+    this.attemptToSolveGame(game, bulls);
+    guessService.createGuess(game, guess, bulls, cows);
 
+    return game;
+  }
+
+  /**
+   * Attempts to solve a Game. Sets the Game solved property to true if the bulls count is 4.
+   *
+   * @param game
+   * @param bulls
+   */
+  private void attemptToSolveGame(Game game, Integer bulls) {
     if (bulls.equals(4)) {
       game.setSolved(true);
       repository.save(game);
     }
-
-    guessService.createGuess(game, guess, bulls, cows);
-
-    return game;
   }
 }

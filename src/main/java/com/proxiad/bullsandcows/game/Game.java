@@ -24,5 +24,5 @@ public class Game {
   private String goal;
 
   @Column(name = "solved")
-  private boolean solved;
+  private Boolean solved;
 }

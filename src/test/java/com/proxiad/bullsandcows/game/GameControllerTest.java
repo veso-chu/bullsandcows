@@ -1,26 +1,24 @@
 package com.proxiad.bullsandcows.game;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.proxiad.bullsandcows.guess.GuessService;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(GameController.class)
 class GameControllerTest {
 
   @MockBean private GameService gameService;
+  @MockBean private GuessService guessService;
 
   //  @Autowired private WebApplicationContext webApplicationContext;
 
-  @Autowired private MockMvc mockMvc;
+  //  @Autowired private MockMvc mockMvc;
 
-  @Test
-  void shouldCreateMockMvc() {
-    assertNotNull(mockMvc);
-  }
-
+  //  @Test
+  //  void shouldCreateMockMvc() {
+  //    assertNotNull(mockMvc);
+  //  }
+  //
   //  @Test
   //  void testGameListShouldReturnListOfGames() {
   //    Game game = new Game();

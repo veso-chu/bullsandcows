@@ -13,7 +13,7 @@
 	<body style="text-align: center;">
 		<h1>Game (<c:out value="${game.getId()}"/>)</h1>
 		<c:choose>
-			<c:when test="${game.isSolved()}">
+			<c:when test="${game.getSolved() == true}">
 				<td colspan="2">
 					<h2 style="color:#228C22;">Solved!</h2>
 				</td>

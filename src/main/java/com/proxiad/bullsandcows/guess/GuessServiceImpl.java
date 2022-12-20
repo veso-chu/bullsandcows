@@ -11,7 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GuessServiceImpl implements GuessService {
 
-  @Autowired private GuessRepository guessRepository;
+  private GuessRepository guessRepository;
+
+  @Autowired
+  public GuessServiceImpl(GuessRepository guessRepository) {
+    this.guessRepository = guessRepository;
+  }
 
   @Override
   public Guess createGuess(Game game, String guess, Integer bulls, Integer cows) {
@@ -26,6 +31,7 @@ public class GuessServiceImpl implements GuessService {
     return guessObj;
   }
 
+  @Override
   public List<Guess> findGuessesByGameId(String gameId) {
     return guessRepository.findByGameId(gameId);
   }

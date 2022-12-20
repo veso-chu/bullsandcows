@@ -68,7 +68,6 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 	
 		<!-- Spring boot -->
 		<dependency>

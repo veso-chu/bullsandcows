@@ -1,33 +1,64 @@
 package com.proxiad.bullsandcows.game;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import jakarta.validation.ConstraintValidatorContext;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class GameGoalValidatorTest {
 
-	private final String ACCEPTED_STRING = "1234";
-	private final String TOO_LONG_STRING = "12345";
-	private final String NON_UNIQUE_NUMBERS_STRING = "1233";
-	private final String NON_NUMERIC_STRING = "123a";
+  @Test
+  void testValidateGameGoalStringReturnsTrueIfGameGoalStringIsFourUniqueNumericCharacters() {
+    assertThat(GameGoalValidator.validateGameGoalString("1234")).isTrue();
+  }
 
-	@Test
-	void testValidateGameGoalStringReturnsTrueIfGameGoalStringIsFourUniqueNumericCharacters() {
-		assertTrue(GameGoalValidator.validateGameGoalString(ACCEPTED_STRING));
-	}
+  @Test
+  void testValidateGameGoalStringReturnsFalseIfGameGoalStringIsTooLong() {
+    assertThat(GameGoalValidator.validateGameGoalString("12345")).isFalse();
+  }
 
-	@Test
-	void testValidateGameGoalStringReturnsFalseIfGameGoalStringIsTooLong() {
-		assertFalse(GameGoalValidator.validateGameGoalString(TOO_LONG_STRING));
-	}
+  @Test
+  void testValidateGameGoalStringReturnsFalseIfGameGoalStringContainsNonUniqueCharacters() {
+    assertThat(GameGoalValidator.validateGameGoalString("1233")).isFalse();
+  }
 
-	@Test
-	void testValidateGameGoalStringReturnsFalseIfGameGoalStringContainsNonUniqueCharacters() {
-		assertFalse(GameGoalValidator.validateGameGoalString(NON_UNIQUE_NUMBERS_STRING));
-	}
+  @Test
+  void testValidateGameGoalStringReturnsFalseIfGameGoalStringContainsNonNumericCharacters() {
+    assertThat(GameGoalValidator.validateGameGoalString("123a")).isFalse();
+  }
 
-	@Test
-	void testValidateGameGoalStringReturnsFalseIfGameGoalStringContainsNonNumericCharacters() {
-		assertFalse(GameGoalValidator.validateGameGoalString(NON_NUMERIC_STRING));
-	}
+  @Nested
+  class isValidTests {
+
+    ConstraintValidatorContext constraintValidatorContext;
+    GameGoalValidator gameGoalValidator;
+
+    @BeforeEach
+    void setUp() {
+      constraintValidatorContext = mock(ConstraintValidatorContext.class);
+      gameGoalValidator = new GameGoalValidator();
+    }
+
+    @Test
+    void testIsValidReturnsTrueIfGameGoalStringIsFourUniqueNumericCharacters() {
+      assertThat(gameGoalValidator.isValid("1234", constraintValidatorContext)).isTrue();
+    }
+
+    @Test
+    void testIsValidReturnsFalseIfGameGoalStringIsTooLong() {
+      assertThat(gameGoalValidator.isValid("12345", constraintValidatorContext)).isFalse();
+    }
+
+    @Test
+    void testIsValidReturnsFalseIfGameGoalStringContainsNonUniqueCharacters() {
+      assertThat(gameGoalValidator.isValid("1233", constraintValidatorContext)).isFalse();
+    }
+
+    @Test
+    void testIsValidReturnsFalseIfGameGoalStringContainsNonNumericCharacters() {
+      assertThat(gameGoalValidator.isValid("123a", constraintValidatorContext)).isFalse();
+    }
+  }
 }
