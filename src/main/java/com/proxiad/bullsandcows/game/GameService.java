@@ -27,8 +27,8 @@ public interface GameService {
   Game createGame(String goal);
 
   /**
-   * Attempt to guess the passed Game goal. Returns a Map with 0 values if the passed guess String
-   * is incorrect.
+   * Attempt to guess the passed Game goal. If the guess matches the Game goal, the Game solved
+   * property is set to true.
    *
    * @param game
    * @param goal

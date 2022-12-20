@@ -50,14 +50,13 @@ public class GameServiceImpl implements GameService {
     Game game = new Game();
     game.setId(UUID.randomUUID().toString());
     game.setGoal(goal);
-    //    game.setGuessList(new ArrayList<>());
     repository.save(game);
     return game;
   }
 
   /**
-   * Attempt to guess the passed Game goal. Returns a Map with 0 values if the passed guess String
-   * is incorrect.
+   * Attempt to guess the passed Game goal. If the guess matches the Game goal, the Game solved
+   * property is set to true.
    *
    * @param game
    * @param goal
@@ -85,7 +84,6 @@ public class GameServiceImpl implements GameService {
     }
 
     guessService.createGuess(game, guess, bulls, cows);
-    //    game.getGuessList().add(guessService.createGuess(game, guess, bulls, cows));
 
     return game;
   }

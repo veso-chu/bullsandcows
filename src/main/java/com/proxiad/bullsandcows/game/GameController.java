@@ -21,6 +21,12 @@ public class GameController {
 
   private final GuessServiceImpl guessService;
 
+  /**
+   * Constructor
+   *
+   * @param gameService
+   * @param guessService
+   */
   @Autowired
   public GameController(GameServiceImpl gameService, GuessServiceImpl guessService) {
     this.gameService = gameService;

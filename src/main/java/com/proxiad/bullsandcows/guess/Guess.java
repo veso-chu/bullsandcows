@@ -11,11 +11,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "guesses")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Guess {
 
   @Id private String id;
@@ -36,52 +42,4 @@ public class Guess {
   @OnDelete(action = OnDeleteAction.CASCADE)
   @JsonIgnore
   private Game game;
-
-  public Guess() {}
-
-  //  public Guess(String guess, Integer bulls, Integer cows) {
-  //    this.setGuess(guess);
-  //    this.setBulls(bulls);
-  //    this.setCows(cows);
-  //  }
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getGuess() {
-    return guess;
-  }
-
-  public void setGuess(String guess) {
-    this.guess = guess;
-  }
-
-  public Integer getBulls() {
-    return bulls;
-  }
-
-  public void setBulls(Integer bulls) {
-    this.bulls = bulls;
-  }
-
-  public Integer getCows() {
-    return cows;
-  }
-
-  public void setCows(Integer cows) {
-    this.cows = cows;
-  }
-
-  public Game getGame() {
-    return game;
-  }
-
-  public void setGame(Game game) {
-    this.game = game;
-  }
 }
