@@ -1,6 +1,6 @@
 package com.proxiad.bullsandcows.game;
 
-import com.proxiad.bullsandcows.guess.GuessServiceImpl;
+import com.proxiad.bullsandcows.guess.GuessService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class GameServiceImpl implements GameService {
 
-  @Autowired private GameRepository repository;
+  private GameRepository repository;
+  private GuessService guessService;
 
-  @Autowired private GuessServiceImpl guessService;
+  @Autowired
+  public GameServiceImpl(GameRepository repository, GuessService guessService) {
+    this.repository = repository;
+    this.guessService = guessService;
+  }
 
   /**
    * Retrieves all Game objects from the repository
