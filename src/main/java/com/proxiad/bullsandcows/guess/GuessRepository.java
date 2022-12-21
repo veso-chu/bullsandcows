@@ -1,5 +1,6 @@
 package com.proxiad.bullsandcows.guess;
 
+import com.proxiad.bullsandcows.game.Game;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface GuessRepository extends JpaRepository<Guess, String> {
 
   /**
-   * Retrieves a list of Guess objects, related to a Game with gameId, contained in this repository.
+   * Retrieves a list of {@link Guess} objects, related to a {@link Game} with gameId, contained in
+   * this repository.
    *
    * @param gameId
    * @return
@@ -15,7 +17,8 @@ public interface GuessRepository extends JpaRepository<Guess, String> {
   List<Guess> findByGameId(String gameId);
 
   /**
-   * Deletes all Guess objects, related to a Game with gameId, contained in this repository.
+   * Deletes all {@link Guess} objects, related to a {@link Game} with gameId, contained in this
+   * repository.
    *
    * @param gameId
    */

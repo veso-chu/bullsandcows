@@ -62,7 +62,8 @@ public class GameServiceImpl implements GameService {
   }
 
   /**
-   * Attempts to solve a Game. Sets the Game solved property to true if the bulls count is 4.
+   * Attempts to solve a {@link Game}. Sets the {@link Game} solved property to true if the bulls
+   * count is 4.
    *
    * @param game
    * @param bulls

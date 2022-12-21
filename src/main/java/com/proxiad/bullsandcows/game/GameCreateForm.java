@@ -10,6 +10,11 @@ public class GameCreateForm {
 
   @NotEmpty @GameGoalConstraint private String goal;
 
+  /**
+   * Constructor
+   *
+   * @param goal
+   */
   public GameCreateForm(String goal) {
     this.setGoal(goal);
   }
