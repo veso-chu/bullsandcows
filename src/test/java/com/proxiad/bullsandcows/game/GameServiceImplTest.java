@@ -60,7 +60,7 @@ class GameServiceImplTest {
     game.setSolved(false);
     when(gameRepository.findByName("12345")).thenReturn(game);
 
-    gameService.guessGameGoal(game, "4321");
+    gameService.guessGameGoal("12345", "4321");
     assertThat(game.getSolved()).isFalse();
   }
 
@@ -72,7 +72,7 @@ class GameServiceImplTest {
     game.setSolved(false);
     when(gameRepository.findByName("12345")).thenReturn(game);
 
-    gameService.guessGameGoal(game, VALID_GOAL_STRING);
+    gameService.guessGameGoal("12345", VALID_GOAL_STRING);
     assertThat(game.getSolved()).isTrue();
   }
 

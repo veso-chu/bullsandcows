@@ -10,6 +10,9 @@ public class GameCreateForm {
 
   @NotEmpty @GameGoalConstraint private String goal;
 
+  /** Empty Constructor */
+  public GameCreateForm() {}
+
   /**
    * Constructor
    *

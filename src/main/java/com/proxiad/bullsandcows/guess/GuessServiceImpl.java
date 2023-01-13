@@ -20,10 +20,10 @@ public class GuessServiceImpl implements GuessService {
   @Override
   public Guess createGuess(Game game, String guess, Integer bulls, Integer cows) {
     Guess guessObj = new Guess();
+    guessObj.setGame(game);
     guessObj.setGuess(guess);
     guessObj.setBulls(bulls);
     guessObj.setCows(cows);
-    guessObj.setGame(game);
     guessRepository.save(guessObj);
 
     return guessObj;

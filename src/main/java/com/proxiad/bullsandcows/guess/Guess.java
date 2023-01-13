@@ -1,5 +1,6 @@
 package com.proxiad.bullsandcows.guess;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.proxiad.bullsandcows.game.Game;
 import com.proxiad.bullsandcows.game.GameGoalConstraint;
 import jakarta.persistence.Column;
@@ -9,14 +10,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "guesses")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -29,10 +29,11 @@ public class Guess {
 
   @NotEmpty @GameGoalConstraint private String guess;
 
-  private Integer bulls;
+  @NotNull private Integer bulls;
 
-  private Integer cows;
+  @NotNull private Integer cows;
 
+  @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "game_id", nullable = false)
   private Game game;

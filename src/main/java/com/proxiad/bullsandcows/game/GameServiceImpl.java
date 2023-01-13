@@ -3,7 +3,6 @@ package com.proxiad.bullsandcows.game;
 import com.proxiad.bullsandcows.guess.GuessService;
 import java.util.List;
 import java.util.UUID;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ public class GameServiceImpl implements GameService {
   private GameRepository repository;
   private GuessService guessService;
 
-  @Autowired
   public GameServiceImpl(GameRepository repository, GuessService guessService) {
     this.repository = repository;
     this.guessService = guessService;
@@ -47,7 +45,8 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game guessGameGoal(Game game, String guess) {
+  public Game guessGameGoal(String gameName, String guess) {
+    Game game = getGameByName(gameName);
     Integer bulls = 0;
     Integer cows = 0;
 
@@ -60,15 +59,14 @@ public class GameServiceImpl implements GameService {
         }
       }
     }
-    attemptToSolveGame(game, bulls);
     guessService.createGuess(game, guess, bulls, cows);
+    attemptToSolveGame(game, bulls);
 
     return game;
   }
 
   /**
-   * Attempts to solve a {@link Game}. Sets the {@link Game} solved property to true if the bulls
-   * count is 4.
+   * Attempts to solve a {@link Game}. Sets the solved property to true if the bulls count is 4.
    *
    * @param game
    * @param bulls

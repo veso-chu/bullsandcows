@@ -39,9 +39,9 @@ public interface GameService {
    * Attempt to guess the goal of a {@link Game} with id. If the guess matches the {@link Game}
    * goal, the {@link Game} solved property is set to true.
    *
-   * @param id The id of the {@link Game} object that the guess attempt will be made on
+   * @param gameName The name of the {@link Game} object that the guess attempt will be made on
    * @param guess The string symbolizing with the guess attempt
    * @return The {@link Game} object if found. Else returns null
    */
-  Game guessGameGoal(Game game, String guess);
+  Game guessGameGoal(String gameName, String guess);
 }

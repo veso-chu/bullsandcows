@@ -11,6 +11,9 @@ public class GuessCreateForm {
 
   @NotEmpty @GameGoalConstraint private String guess;
 
+  /** Empty Constructor */
+  public GuessCreateForm() {}
+
   /**
    * Constructor
    *
