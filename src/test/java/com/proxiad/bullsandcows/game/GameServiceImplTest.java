@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import com.proxiad.bullsandcows.guess.GuessService;
 import com.proxiad.bullsandcows.guess.GuessServiceImpl;
-import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,18 +31,18 @@ class GameServiceImplTest {
   @Test
   void testGetGameReturnsTheCorrectGame() {
     Game game = new Game();
-    game.setId("12345");
+    game.setName("12345");
     game.setGoal(VALID_GOAL_STRING);
     game.setSolved(false);
-    when(gameRepository.findById("12345")).thenReturn(Optional.of(game));
+    when(gameRepository.findByName("12345")).thenReturn(game);
 
-    Game returnedGame = gameService.getGame("12345");
+    Game returnedGame = gameService.getGameByName("12345");
     assertThat(returnedGame).isSameAs(game);
   }
 
   @Test
   void testGetGameReturnsNullIfGameDoesNotExist() {
-    assertThat(gameService.getGame("54321")).isNull();
+    assertThat(gameService.getGameByName("54321")).isNull();
   }
 
   @Test
@@ -56,24 +55,24 @@ class GameServiceImplTest {
   @Test
   void testGuessGameDoesNotSetSolvedToTrueWhenWrongGuessIsPassed() {
     Game game = new Game();
-    game.setId("12345");
+    game.setName("12345");
     game.setGoal(VALID_GOAL_STRING);
     game.setSolved(false);
-    when(gameRepository.findById("12345")).thenReturn(Optional.of(game));
+    when(gameRepository.findByName("12345")).thenReturn(game);
 
-    gameService.guessGameGoal("12345", "4321");
+    gameService.guessGameGoal(game, "4321");
     assertThat(game.getSolved()).isFalse();
   }
 
   @Test
   void testGuessGameSetsSolvedToTrueWhenValidGuessIsPassed() {
     Game game = new Game();
-    game.setId("12345");
+    game.setName("12345");
     game.setGoal(VALID_GOAL_STRING);
     game.setSolved(false);
-    when(gameRepository.findById("12345")).thenReturn(Optional.of(game));
+    when(gameRepository.findByName("12345")).thenReturn(game);
 
-    gameService.guessGameGoal("12345", VALID_GOAL_STRING);
+    gameService.guessGameGoal(game, VALID_GOAL_STRING);
     assertThat(game.getSolved()).isTrue();
   }
 

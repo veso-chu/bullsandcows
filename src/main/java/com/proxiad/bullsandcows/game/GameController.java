@@ -43,38 +43,38 @@ public class GameController {
     return "home";
   }
 
-  @GetMapping("game/{id}")
+  @GetMapping("game/{name}")
   public String getGameView(
-      @PathVariable String id,
+      @PathVariable String name,
       @ModelAttribute("guessCreateForm") GuessCreateForm guessCreateForm,
       Map<String, Object> model) {
-    Game game = gameService.getGame(id);
+    Game game = gameService.getGameByName(name);
     if (game == null) {
       return "redirect:/404";
     }
 
     model.put("game", game);
-    model.put("guesses", guessService.findGuessesByGameId(id));
+    model.put("guesses", guessService.findGuessesByGameId(game.getId()));
 
     return "game/view";
   }
 
-  @PostMapping("game/{id}/guess")
+  @PostMapping("game/{name}/guess")
   public String makeGuess(
-      @PathVariable String id,
+      @PathVariable String name,
       @Valid @ModelAttribute("guessCreateForm") GuessCreateForm guessCreateForm,
       BindingResult bindingResult,
       Map<String, Object> model) {
-    Game game = gameService.getGame(id);
+    Game game = gameService.getGameByName(name);
     if (game == null) {
       return "redirect:/404";
     }
     model.put("game", game);
 
     if (!bindingResult.hasErrors()) {
-      gameService.guessGameGoal(id, guessCreateForm.getGuess());
+      gameService.guessGameGoal(game, guessCreateForm.getGuess());
     }
-    model.put("guesses", guessService.findGuessesByGameId(id));
+    model.put("guesses", guessService.findGuessesByGameId(game.getId()));
 
     return "game/view";
   }
@@ -100,6 +100,6 @@ public class GameController {
     }
     var game = gameService.createGame(gameCreateForm.getGoal());
 
-    return "redirect:game/" + game.getId();
+    return "redirect:game/" + game.getName();
   }
 }

@@ -11,7 +11,7 @@
 		<link href="<c:url value="/resources/css/errors.css" />" rel="stylesheet">
 	</head>
 	<body style="text-align: center;">
-		<h1>Game (<c:out value="${game.getId()}"/>)</h1>
+		<h1>Game (<c:out value="${game.getName()}"/>)</h1>
 		<c:choose>
 			<c:when test="${game.getSolved() == true}">
 				<td colspan="2">
@@ -19,7 +19,7 @@
 				</td>
 			</c:when>
 			<c:otherwise>
-				<form:form modelAttribute="guessCreateForm" action="/game/${game.getId()}/guess">
+				<form:form modelAttribute="guessCreateForm" action="/game/${game.getName()}/guess">
 					<table style="margin: 0 auto; text-align: center;">
 						<tr>
 							<td>Guess:</td>

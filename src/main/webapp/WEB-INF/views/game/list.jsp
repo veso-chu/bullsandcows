@@ -15,7 +15,7 @@
 	    		<c:forEach items="${games}" var="game">
 					<tr>
 						<td>
-							<a href="/game/${game.getId()}"><c:out value="Game(${game.getId()})"/></a>
+							<a href="/game/${game.getName()}"><c:out value="Game(${game.getName()})"/></a>
 						</td>
 					</tr>
 				</c:forEach>

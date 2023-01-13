@@ -26,23 +26,28 @@ public class GameServiceImpl implements GameService {
   }
 
   @Override
-  public Game getGame(String id) {
+  public Game getGame(Long id) {
     return repository.findById(id).orElse(null);
+  }
+
+  @Override
+  public Game getGameByName(String name) {
+    return repository.findByName(name);
   }
 
   @Override
   public Game createGame(String goal) {
     Game game = new Game();
-    game.setId(UUID.randomUUID().toString());
+    game.setName(UUID.randomUUID().toString());
     game.setGoal(goal);
     game.setSolved(false);
     repository.save(game);
+
     return game;
   }
 
   @Override
-  public Game guessGameGoal(String id, String guess) {
-    Game game = this.getGame(id);
+  public Game guessGameGoal(Game game, String guess) {
     Integer bulls = 0;
     Integer cows = 0;
 
@@ -55,7 +60,7 @@ public class GameServiceImpl implements GameService {
         }
       }
     }
-    this.attemptToSolveGame(game, bulls);
+    attemptToSolveGame(game, bulls);
     guessService.createGuess(game, guess, bulls, cows);
 
     return game;

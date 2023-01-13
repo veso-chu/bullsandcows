@@ -5,7 +5,7 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface GuessRepository extends JpaRepository<Guess, String> {
+public interface GuessRepository extends JpaRepository<Guess, Long> {
 
   /**
    * Retrieves a list of {@link Guess} objects, related to a {@link Game} with gameId, contained in
@@ -14,7 +14,7 @@ public interface GuessRepository extends JpaRepository<Guess, String> {
    * @param gameId
    * @return
    */
-  List<Guess> findByGameId(String gameId);
+  List<Guess> findByGameId(Long gameId);
 
   /**
    * Deletes all {@link Guess} objects, related to a {@link Game} with gameId, contained in this
@@ -23,5 +23,5 @@ public interface GuessRepository extends JpaRepository<Guess, String> {
    * @param gameId
    */
   @Transactional
-  void deleteByGameId(String gameId);
+  void deleteByGameId(Long gameId);
 }

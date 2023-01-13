@@ -22,5 +22,5 @@ public interface GuessService {
    * @param gameId
    * @return
    */
-  List<Guess> findGuessesByGameId(String gameId);
+  List<Guess> findGuessesByGameId(Long gameId);
 }
